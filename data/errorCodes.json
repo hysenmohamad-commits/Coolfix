@@ -1,0 +1,1548 @@
+[
+  {
+    "id": "lg-ac-inv-ch10",
+    "brand": "LG",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter",
+    "applicable_models": ["LG Dual Inverter 2018+", "LG ARTCOOL"],
+    "code": "CH10",
+    "name": "Erreur de Communication Intérieure/Extérieure",
+    "subsystem": "Communication",
+    "severity": "CRITICAL",
+    "description": "Échec de la communication série entre la carte mère de l'unité intérieure et extérieure.",
+    "root_causes": [
+      { "rank": 1, "cause": "Fil de signal inter-unités (Ligne S) ouvert ou en court-circuit" },
+      { "rank": 2, "cause": "Carte mère intérieure défectueuse" },
+      { "rank": 3, "cause": "Carte MICOM extérieure défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Inspecter la continuité du câblage inter-unités",
+        "measurement": "Résistance sur la ligne S",
+        "expected_value": "< 1Ω",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier la fluctuation de tension de la ligne S",
+        "measurement": "Tension DC entre N et 3",
+        "expected_value": "Fluctuante 0-70V DC",
+        "tool": "Multimètre (DC)"
+      }
+    ],
+    "test_points": [
+      { "label": "Tension Ligne S broche 3 (intérieure)", "expected": "DC Fluctuant" }
+    ],
+    "reset_procedure": "Coupez l'alimentation, attendez 3 minutes, rallumez. Si le défaut persiste, remplacez la carte (extérieure en premier).",
+    "parts_likely_needed": [
+      { "name": "Carte Mère Intérieure", "part_number": "EBR84632901" }
+    ],
+    "related_codes": ["CH07", "CH38", "CH44"],
+    "notes": "Vérifiez que la ligne S n'est pas près de câbles haute tension (interférences)."
+  },
+  {
+    "id": "lg-wm-inv-oe",
+    "brand": "LG",
+    "appliance": "Lave-linge",
+    "subtype": "Chargement Frontal Inverter",
+    "applicable_models": ["LG 6 Motion DD", "LG Thinq"],
+    "code": "OE",
+    "name": "Erreur de Vidange",
+    "subsystem": "Pompe",
+    "severity": "FAULT",
+    "description": "La machine n'a pas réussi à vidanger l'eau dans le délai imparti (généralement 10 minutes).",
+    "root_causes": [
+      { "rank": 1, "cause": "Filtre de pompe bouché / Pièces de monnaie" },
+      { "rank": 2, "cause": "Tuyau de vidange bloqué" },
+      { "rank": 3, "cause": "Moteur de pompe de vidange défectueux" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Ouvrir la trappe de service inférieure et nettoyer le filtre",
+        "measurement": "Inspection visuelle",
+        "expected_value": "Aucun débris",
+        "tool": "Serviette/Pince"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier la tension vers la pompe de vidange en cycle",
+        "measurement": "Tension AC aux bornes de la pompe",
+        "expected_value": "230V AC",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 3,
+        "action": "Mesurer la résistance de la bobine de la pompe",
+        "measurement": "Résistance (hors tension)",
+        "expected_value": "10-20 Ω",
+        "tool": "Multimètre (Ohms)"
+      }
+    ],
+    "test_points": [
+      { "label": "Résistance Bobine Pompe", "expected": "~15 Ω selon le modèle" }
+    ],
+    "reset_procedure": "Dégagez l'obstruction, lancez un cycle vidange/essorage pour confirmer le fonctionnement.",
+    "parts_likely_needed": [
+      { "name": "Ensemble Pompe Vidange", "part_number": "4681EA2001T ou similaire" }
+    ],
+    "related_codes": ["DE"],
+    "notes": "Vérifiez toujours la présence de pièces ou de vis bloquant la turbine."
+  },
+  {
+    "id": "samsung-ref-inv-22e",
+    "brand": "Samsung",
+    "appliance": "Réfrigérateur",
+    "subtype": "Porte Française Inverter",
+    "applicable_models": ["RF28", "RF26", "RS"],
+    "code": "22E",
+    "name": "Erreur Ventilateur Réfrigérateur",
+    "subsystem": "Moteur Ventilateur",
+    "severity": "WARNING",
+    "description": "Le ventilateur de l'évaporateur du compartiment réfrigérateur ne tourne pas correctement.",
+    "root_causes": [
+      { "rank": 1, "cause": "Accumulation de glace bloquant les pales" },
+      { "rank": 2, "cause": "Moteur de ventilateur défectueux (BLDC)" },
+      { "rank": 3, "cause": "Problème d'alimentation de la carte mère" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier l'accumulation de glace sur l'évaporateur",
+        "measurement": "Visuelle",
+        "expected_value": "Pas de glace",
+        "tool": "Lampe de poche"
+      },
+      {
+        "step": 2,
+        "action": "Vérifiez la tension d'entrée du moteur",
+        "measurement": "Tension DC au connecteur (Carte Mère)",
+        "expected_value": "7-12V DC",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Vcc Ventilateur BLDC", "expected": "12V DC" },
+      { "label": "Signal FG BLDC", "expected": "2-3V DC fluctuant" }
+    ],
+    "reset_procedure": "Forcez le mode dégivrage. Si récurrent, remplacez le ventilateur ou le bimétal de dégivrage.",
+    "parts_likely_needed": [
+      { "name": "Moteur Ventilateur Évaporateur", "part_number": "DA31-00146E" }
+    ],
+    "related_codes": ["22C"],
+    "notes": "Souvent causé par un échec du dégivrage. Assurez-vous que la résistance fonctionne."
+  },
+  {
+    "id": "whirlpool-wm-tl-f7e1",
+    "brand": "Whirlpool",
+    "appliance": "Lave-linge",
+    "subtype": "Chargement par le haut",
+    "applicable_models": ["Cabrio", "Maytag Bravos"],
+    "code": "F7E1",
+    "name": "Erreur du Capteur Tachymétrique",
+    "subsystem": "Moteur/Capteur",
+    "severity": "FAULT",
+    "description": "La carte principale ne détecte pas la vitesse du moteur via l'actionneur ou le capteur optique.",
+    "root_causes": [
+      { "rank": 1, "cause": "Actionneur de changement de vitesse défectueux" },
+      { "rank": 2, "cause": "Faisceau de câbles vers l'actionneur coupé" },
+      { "rank": 3, "cause": "Ensemble d'embrayage (Splutch) bloqué" },
+      { "rank": 4, "cause": "Carte mère défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Inspecter le faisceau entre l'actionneur et la carte",
+        "measurement": "Continuité",
+        "expected_value": "Sans coupure",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la tension du capteur optique depuis la carte",
+        "measurement": "Tension DC",
+        "expected_value": "12V alimentation, +5V signal",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Signal Tachymètre Actionneur", "expected": "5V DC basculant" }
+    ],
+    "reset_procedure": "Entrez dans le mode de test diagnostic, effacez les codes, et lancez un test moteur.",
+    "parts_likely_needed": [
+      { "name": "Actionneur (Shift Actuator)", "part_number": "W10006355" },
+      { "name": "Kit de Came (Splutch)", "part_number": "W10721967" }
+    ],
+    "related_codes": ["F7E5", "F7E7"],
+    "notes": "La panne d'actionneur est extrêmement courante. Inspectez aussi le condensateur."
+  },
+  {
+    "id": "daikin-ac-inv-u4",
+    "brand": "Daikin",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter",
+    "applicable_models": ["Série RX/FTX"],
+    "code": "U4",
+    "name": "Erreur de Transmission (Int. vers Ext.)",
+    "subsystem": "Communication",
+    "severity": "CRITICAL",
+    "description": "Rupture de communication entre l'unité intérieure et l'unité extérieure.",
+    "root_causes": [
+      { "rank": 1, "cause": "Câblage incorrect ou borne desserrée" },
+      { "rank": 2, "cause": "Carte PCB intérieure défectueuse" },
+      { "rank": 3, "cause": "Carte PCB extérieure défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier les borniers 1, 2, 3 sur les deux unités",
+        "measurement": "Serrage/Continuité",
+        "expected_value": "Sécurisé et intact",
+        "tool": "Tournevis"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la tension de transmission entre 2 et 3",
+        "measurement": "Tension DC",
+        "expected_value": "Fluctuante 16-30V DC",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Bornes 2 & 3", "expected": "DC Fluctuant" }
+    ],
+    "reset_procedure": "Coupez au disjoncteur 5 min. Redémarrez. Revérifiez le code via la télécommande.",
+    "parts_likely_needed": [
+      { "name": "Carte PCB Extérieure", "part_number": "Varie selon BTU" },
+      { "name": "Carte PCB Intérieure", "part_number": "Varie selon modèle" }
+    ],
+    "related_codes": ["U0", "U5"],
+    "notes": "Vérifiez que le 230V n'a pas été appliqué à la borne 3 par erreur (détruit le circuit de comm)."
+  },
+  {
+    "id": "bosch-dw-e15",
+    "brand": "Bosch",
+    "appliance": "Lave-vaisselle",
+    "subtype": "Encastrable",
+    "applicable_models": ["Ascenta", "Série 300", "Série 500", "Série 800"],
+    "code": "E15",
+    "name": "Fuite d'Eau Détectée",
+    "subsystem": "Capteur",
+    "severity": "CRITICAL",
+    "description": "De l'eau s'est accumulée dans le bac de rétention, déclenchant le flotteur anti-débordement.",
+    "root_causes": [
+      { "rank": 1, "cause": "Joint de pompe ou tuyau de cuve fuyant" },
+      { "rank": 2, "cause": "Défaillance du joint torique de l'électrovanne" },
+      { "rank": 3, "cause": "Trop de mousse causant un débordement" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Débrancher l'appareil et retirer la plinthe pour inspecter le bac",
+        "measurement": "Inspection visuelle",
+        "expected_value": "Bac sec",
+        "tool": "Lampe de poche"
+      },
+      {
+        "step": 2,
+        "action": "Inspecter l'interrupteur à flotteur",
+        "measurement": "Continuité aux bornes",
+        "expected_value": "Fermé si le flotteur est en bas",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Continuité Flotteur", "expected": "0 Ohms à sec" }
+    ],
+    "reset_procedure": "Séchez l'eau dans le bac avec une éponge pour réinitialiser le flotteur.",
+    "parts_likely_needed": [
+      { "name": "Kit Joint de Cuve", "part_number": "12005744" }
+    ],
+    "related_codes": ["E27", "E23"],
+    "notes": "Ajouter un joint en silicone rétoud souvent les erreurs E15 récurrentes."
+  },
+  {
+    "id": "samsung-wm-4e",
+    "brand": "Samsung",
+    "appliance": "Lave-linge",
+    "subtype": "Chargement Frontal/Haut",
+    "applicable_models": ["Séries WF", "WA"],
+    "code": "4E",
+    "name": "Erreur d'Arrivée d'Eau",
+    "subsystem": "Admission",
+    "severity": "FAULT",
+    "description": "Le lave-linge ne se remplit pas d'eau ou met trop de temps.",
+    "root_causes": [
+      { "rank": 1, "cause": "Filtres de l'électrovanne colmatés" },
+      { "rank": 2, "cause": "Tuyaux d'arrivée d'eau pliés" },
+      { "rank": 3, "cause": "Électrovanne d'arrivée d'eau défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Couper l'eau, retirer les tuyaux et vérifier les filtres à mailles",
+        "measurement": "Visuelle",
+        "expected_value": "Propre",
+        "tool": "Pince"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer les solénoïdes de l'électrovanne d'entrée",
+        "measurement": "Résistance",
+        "expected_value": "1-1.2 kΩ",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Solénoïdes de Vanne", "expected": "1100 Ohms" }
+    ],
+    "reset_procedure": "Éteindre et rallumer la machine après avoir résolu le problème d'eau.",
+    "parts_likely_needed": [
+      { "name": "Ensemble Électrovanne d'Eau", "part_number": "DC62-30312J" }
+    ],
+    "related_codes": ["4C", "NF"],
+    "notes": "Le code 4C est la mise à jour de 4E sur les nouveaux modèles."
+  },
+  {
+    "id": "frigidaire-ref-sy-ef",
+    "brand": "Frigidaire",
+    "appliance": "Réfrigérateur",
+    "subtype": "Américain / Porte Française",
+    "applicable_models": ["Gallery", "Professional"],
+    "code": "SY EF",
+    "name": "Panne Circuit Vent. Évaporateur",
+    "subsystem": "Moteur Vent.",
+    "severity": "WARNING",
+    "description": "La carte mère détecte un problème avec le circuit du moteur du ventilateur d'évaporateur.",
+    "root_causes": [
+      { "rank": 1, "cause": "Ventilateur d'évaporateur défectueux" },
+      { "rank": 2, "cause": "Glace bloquant les pales du ventilateur" },
+      { "rank": 3, "cause": "Carte mère défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier l'accumulation de glace empêchant la rotation",
+        "measurement": "Visuelle",
+        "expected_value": "Ventilateur libre de tourner",
+        "tool": "Aucun"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier la tension de sortie de la carte",
+        "measurement": "Tension DC à la carte (Connecteur J4A)",
+        "expected_value": "12V DC entre Rouge et Marron",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Sortie Vent. Carte Principale", "expected": "12V DC" }
+    ],
+    "reset_procedure": "Maintenez 'Clear Alerts' pour réinitialiser. Débrancher 5 minutes peut aussi effacer l'erreur.",
+    "parts_likely_needed": [
+      { "name": "Moteur Ventilateur Évaporateur", "part_number": "241509402" },
+      { "name": "Carte Mère", "part_number": "242115279" }
+    ],
+    "related_codes": ["SY CE", "SY CF"],
+    "notes": "SY EF signifie généralement que le ventilateur reçoit le 12V mais ne tourne pas."
+  },
+  {
+    "id": "ge-oven-f1",
+    "brand": "GE",
+    "appliance": "Four",
+    "subtype": "Électrique",
+    "applicable_models": ["Profile", "Cafe", "Standard"],
+    "code": "F1",
+    "name": "Panne Contrôle Électronique (ERC)",
+    "subsystem": "Carte de Contrôle",
+    "severity": "CRITICAL",
+    "description": "Panne de communication ou défaut interne de la carte électronique principale ou du clavier à membrane.",
+    "root_causes": [
+      { "rank": 1, "cause": "Membrane tactile / Clavier défectueux" },
+      { "rank": 2, "cause": "Carte de contrôle principale (ERC) défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Débrancher la nappe du clavier de la carte ERC. Si l'erreur persiste, c'est la carte. Sinon, c'est la membrane.",
+        "measurement": "Observation dans le temps",
+        "expected_value": "Isoler le composant défaillant",
+        "tool": "Tournevis"
+      }
+    ],
+    "test_points": [
+      { "label": "Test Membrane / ERC", "expected": "Isolement du problème" }
+    ],
+    "reset_procedure": "Débrancher la cuisinière pendant 1 minute. Rebranchez et observez si F1 revient.",
+    "parts_likely_needed": [
+      { "name": "Carte de Contrôle ERC", "part_number": "WB27T10311 (Variable)" }
+    ],
+    "related_codes": ["F0", "F7"],
+    "notes": "F1 peut déclencher une alarme sonore impossible à arrêter sans débrancher l'appareil."
+  },
+  {
+    "id": "whirlpool-dw-f8e1",
+    "brand": "Whirlpool",
+    "appliance": "Lave-vaisselle",
+    "subtype": "Encastrable",
+    "applicable_models": ["Série Gold", "KitchenAid"],
+    "code": "F8E1",
+    "name": "Remplissage Lent / Pas de Remplis.",
+    "subsystem": "Arrivée d'Eau",
+    "severity": "FAULT",
+    "description": "Le système indique un temps de remplissage trop long, et l'indicateur optique (OWI) n'a pas détecté d'eau.",
+    "root_causes": [
+      { "rank": 1, "cause": "Vanne d'alimentation en eau fermée ou restreinte" },
+      { "rank": 2, "cause": "Électrovanne d'arrivée d'eau défectueuse" },
+      { "rank": 3, "cause": "Capteur OWI défectueux" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "S'assurer que la vanne sous l'évier est ouverte",
+        "measurement": "Visuelle/Manuelle",
+        "expected_value": "Vanne ouverte",
+        "tool": "Aucun"
+      },
+      {
+        "step": 2,
+        "action": "Lancer cycle diagnostic et vérifier la tension électrovanne",
+        "measurement": "Tension AC",
+        "expected_value": "230V AC",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Solénoïde d'Arrivée d'Eau", "expected": "~1100 Ohms" }
+    ],
+    "reset_procedure": "Appuyez sur Annuler/Vidange (Cancel/Drain). Lancez un cycle diagnostic.",
+    "parts_likely_needed": [
+      { "name": "Électrovanne d'Arrivée d'Eau", "part_number": "W11175771" }
+    ],
+    "related_codes": ["H2O", "F8E2"],
+    "notes": "Vérifiez que le tuyau n'est pas pincé derrière la machine."
+  },
+  {
+    "id": "lg-ref-er-ff",
+    "brand": "LG",
+    "appliance": "Réfrigérateur",
+    "subtype": "Porte Française",
+    "applicable_models": ["LFX", "LRS"],
+    "code": "Er FF",
+    "name": "Défaut Vent. Congélateur",
+    "subsystem": "Moteur Vent.",
+    "severity": "FAULT",
+    "description": "Le moteur du ventilateur du congélateur ne tourne pas ou n'envoie pas de signal à la carte mère.",
+    "root_causes": [
+      { "rank": 1, "cause": "Formation de givre/glace sur les pales" },
+      { "rank": 2, "cause": "Faux-contact sur le connecteur du ventilateur" },
+      { "rank": 3, "cause": "Moteur du ventilateur du congélateur grillé" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Retirer le panneau arrière (intérieur congélateur) pour vérifier la glace",
+        "measurement": "Visuelle",
+        "expected_value": "Pas de glace",
+        "tool": "Tournevis"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la tension du ventilateur de la carte (CON6)",
+        "measurement": "Tension DC",
+        "expected_value": "12V DC sur VCC, 2.5V sur FG",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Vcc Vent. à la Carte", "expected": "12V DC" }
+    ],
+    "reset_procedure": "Débrancher le frigo 5 min. Si le code revient, un dégivrage forcé pourrait être nécessaire.",
+    "parts_likely_needed": [
+      { "name": "Moteur Ventilateur Congélateur", "part_number": "EAU61505013" }
+    ],
+    "related_codes": ["Er IF", "Er CF"],
+    "notes": "Les fuites d'air causent souvent l'accumulation de givre qui gèle le ventilateur."
+  },
+  {
+    "id": "bosch-wm-e18",
+    "brand": "Bosch",
+    "appliance": "Lave-linge",
+    "subtype": "Chargement Frontal",
+    "applicable_models": ["Ascenta", "Logixx 8", "Série 4"],
+    "code": "E18",
+    "name": "Temps de Vidange Dépassé",
+    "subsystem": "Pompe",
+    "severity": "FAULT",
+    "description": "Le lave-linge n'a pas pu vidanger l'eau dans le temps de sécurité imparti.",
+    "root_causes": [
+      { "rank": 1, "cause": "Filtre de pompe de vidange bloqué" },
+      { "rank": 2, "cause": "Tuyau de vidange ou siphon bouché" },
+      { "rank": 3, "cause": "Pompe de vidange défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Dévisser le filtre en bas à l'avant et nettoyer les débris",
+        "measurement": "Visuelle",
+        "expected_value": "Filtre propre, turbine tourne librement",
+        "tool": "Serviettes"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier la résistance de l'enroulement de la pompe",
+        "measurement": "Résistance",
+        "expected_value": "Env 150 - 250 Ohms (selon le modèle)",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Enroulement Pompe Vidange", "expected": "~200 Ω" }
+    ],
+    "reset_procedure": "Dégagez l'obstruction, mettez sur 'Off', puis lancez un nouveau cycle Vidange/Essorage.",
+    "parts_likely_needed": [
+      { "name": "Insert Pompe de Vidange", "part_number": "00145995 (Variable)" }
+    ],
+    "related_codes": ["F18", "E36"],
+    "notes": "Vérifiez toujours la présence de petits objets (pièces, épingles) bloquant la turbine."
+  },
+  {
+    "id": "carrier-ac-e1",
+    "brand": "Carrier",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter/Split",
+    "applicable_models": ["Infinity", "Performance", "Comfort"],
+    "code": "E1",
+    "name": "Défaut de Sonde Temp. Ambiante",
+    "subsystem": "Capteur",
+    "severity": "WARNING",
+    "description": "La thermistance de l'unité intérieure (capteur de température ambiante) est ouverte ou court-circuitée.",
+    "root_causes": [
+      { "rank": 1, "cause": "Capteur déconnecté de la carte intérieure" },
+      { "rank": 2, "cause": "Capteur défaillant (résistance hors limites)" },
+      { "rank": 3, "cause": "Carte mère intérieure défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Localiser la thermistance d'ambiance sur l'unité et vérifier la connexion",
+        "measurement": "Visuelle",
+        "expected_value": "Bien connectée",
+        "tool": "Aucun"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la résistance du capteur à température ambiante (25°C)",
+        "measurement": "Résistance",
+        "expected_value": "10kΩ ou 15kΩ (selon le modèle)",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Capteur d'Ambiance Débranché", "expected": "10k Ohms à 25°C" }
+    ],
+    "reset_procedure": "Le remplacement du capteur efface automatiquement le code lors du redémarrage.",
+    "parts_likely_needed": [
+      { "name": "Ensemble Thermistance", "part_number": "Vérifiez le manuel" }
+    ],
+    "related_codes": ["E2", "E3"],
+    "notes": "Assurez-vous que le capteur ne touche pas du métal froid ni placé incorrectement."
+  },
+
+  {
+    "id": "lg-ac-ch02",
+    "brand": "LG",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["LG Dual Inverter", "LG ARTCOOL Mirror", "LG Libero"],
+    "code": "CH02",
+    "name": "Défaut Sonde Température Échangeur Intérieur",
+    "subsystem": "Capteur",
+    "severity": "FAULT",
+    "description": "La thermistance de l'échangeur de l'unité intérieure est ouverte ou court-circuitée.",
+    "root_causes": [
+      { "rank": 1, "cause": "Thermistance déconnectée ou endommagée" },
+      { "rank": 2, "cause": "Court-circuit câblage interne" },
+      { "rank": 3, "cause": "Carte PCB intérieure défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier la connexion de la thermistance sur la carte intérieure",
+        "measurement": "Visuelle",
+        "expected_value": "Connecteur bien enfoncé",
+        "tool": "Aucun"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la résistance de la thermistance à 25°C",
+        "measurement": "Résistance",
+        "expected_value": "10 kΩ ± 10%",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Thermistance Échangeur Int.", "expected": "10 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Remplacez la thermistance si hors limites. Réinitialisez l'alimentation.",
+    "parts_likely_needed": [
+      { "name": "Thermistance Échangeur Intérieur LG", "part_number": "6323A23022A" }
+    ],
+    "related_codes": ["CH01", "CH03"],
+    "notes": "CH01 = sonde ambiante, CH02 = sonde échangeur intérieur, CH03 = sonde échangeur extérieur."
+  },
+  {
+    "id": "lg-ac-ch05",
+    "brand": "LG",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["LG ARTCOOL", "LG Dual Inverter 2019+"],
+    "code": "CH05",
+    "name": "Défaut de Surchauffe du Moteur Compresseur",
+    "subsystem": "Protection Compresseur",
+    "severity": "CRITICAL",
+    "description": "La température du bobinage du compresseur dépasse le seuil de sécurité ou le capteur de décharge est ouvert.",
+    "root_causes": [
+      { "rank": 1, "cause": "Charge en réfrigérant insuffisante (sous-charge)" },
+      { "rank": 2, "cause": "Température ambiante extérieure extrêmement élevée" },
+      { "rank": 3, "cause": "Thermistance de décharge défectueuse" },
+      { "rank": 4, "cause": "Compresseur défaillant" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier les pressions de service (haute et basse pression)",
+        "measurement": "Pression réfrigérant",
+        "expected_value": "BP: 5–7 bar, HP: 15–20 bar (R410A au repos)",
+        "tool": "Manifold"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la résistance de la thermistance de décharge compresseur",
+        "measurement": "Résistance",
+        "expected_value": "Varie selon la temp (voir table NTC)",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Sonde Décharge Compresseur", "expected": "50–80 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Arrêtez l'unité 30 min pour refroidissement. Vérifiez la charge en réfrigérant avant redémarrage.",
+    "parts_likely_needed": [
+      { "name": "Thermistance Décharge", "part_number": "6323A20060B" }
+    ],
+    "related_codes": ["CH06", "CH38"],
+    "notes": "Ne redémarrez jamais sans diagnostiquer la cause racine — risque de griller le compresseur."
+  },
+  {
+    "id": "lg-ac-ch38",
+    "brand": "LG",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["LG Dual Cool", "LG Multi Split"],
+    "code": "CH38",
+    "name": "Incompatibilité Unité Int./Ext.",
+    "subsystem": "Communication/Config",
+    "severity": "CRITICAL",
+    "description": "L'unité extérieure ne reconnaît pas l'unité intérieure connectée (mismatch de capacité ou de protocole).",
+    "root_causes": [
+      { "rank": 1, "cause": "Mauvais jumelage modèle intérieur/extérieur" },
+      { "rank": 2, "cause": "DIP switches de l'unité extérieure mal configurés" },
+      { "rank": 3, "cause": "Câble de communication endommagé" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier que les modèles intérieur/extérieur sont compatibles selon le catalogue LG",
+        "measurement": "Documentation",
+        "expected_value": "Correspondance BTU et protocole",
+        "tool": "Manuel LG"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier la configuration DIP sur la PCB extérieure",
+        "measurement": "Visuelle",
+        "expected_value": "Selon schéma du modèle",
+        "tool": "Manuel technique"
+      }
+    ],
+    "test_points": [
+      { "label": "Tension Ligne S", "expected": "DC Fluctuant 0–70V" }
+    ],
+    "reset_procedure": "Coupez l'alimentation. Reconfigurez les DIP switches selon le manuel. Redémarrez.",
+    "parts_likely_needed": [
+      { "name": "Carte PCB Extérieure", "part_number": "EBR86526805" }
+    ],
+    "related_codes": ["CH10", "CH44"],
+    "notes": "Fréquent lors du remplacement d'une unité sans vérifier la compatibilité du nouveau modèle."
+  },
+
+  {
+    "id": "samsung-ac-e1",
+    "brand": "Samsung",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["Samsung Wind-Free", "Samsung Triangle", "AR09/12/18TXHQ"],
+    "code": "E1",
+    "name": "Défaut Sonde Température Intérieure",
+    "subsystem": "Capteur",
+    "severity": "FAULT",
+    "description": "La thermistance de température ambiante de l'unité intérieure est hors plage ou déconnectée.",
+    "root_causes": [
+      { "rank": 1, "cause": "Thermistance ambiante déconnectée du connecteur CN-THP" },
+      { "rank": 2, "cause": "Valeur de résistance hors limites (circuit ouvert ou en court-circuit)" },
+      { "rank": 3, "cause": "Carte PCB intérieure endommagée" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier la connexion de la thermistance sur la carte (CN-THP)",
+        "measurement": "Visuelle",
+        "expected_value": "Connexion sécurisée",
+        "tool": "Aucun"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la résistance de la thermistance à température ambiante",
+        "measurement": "Résistance",
+        "expected_value": "10 kΩ à 25°C",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Sonde Ambiante CN-THP", "expected": "10 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Remplacez la thermistance. Réinitialisez l'alimentation principale.",
+    "parts_likely_needed": [
+      { "name": "Thermistance Ambiante Samsung", "part_number": "DB32-00028C" }
+    ],
+    "related_codes": ["E2", "E3"],
+    "notes": "E1 = ambiante, E2 = échangeur intérieur, E3 = échangeur extérieur."
+  },
+  {
+    "id": "samsung-ac-e4",
+    "brand": "Samsung",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["Samsung Wind-Free Elite", "AR**TXCAAWKN"],
+    "code": "E4",
+    "name": "Protection Haute Pression",
+    "subsystem": "Protection",
+    "severity": "CRITICAL",
+    "description": "Le pressostat haute pression s'est déclenché, indiquant une pression de refoulement anormalement élevée.",
+    "root_causes": [
+      { "rank": 1, "cause": "Condenseur extérieur encrassé (flux d'air obstrué)" },
+      { "rank": 2, "cause": "Ventilateur extérieur en panne" },
+      { "rank": 3, "cause": "Surcharge en réfrigérant (surcharge)" },
+      { "rank": 4, "cause": "Pressostat HP défectueux" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Nettoyer les ailettes du condenseur à l'air comprimé ou à l'eau",
+        "measurement": "Visuelle",
+        "expected_value": "Ailettes propres et dégagées",
+        "tool": "Jet d'eau / Air comprimé"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier la rotation du ventilateur extérieur en fonctionnement",
+        "measurement": "Visuelle/Ampères",
+        "expected_value": "Tourne librement, intensité nominale",
+        "tool": "Pince ampèremétrique"
+      },
+      {
+        "step": 3,
+        "action": "Mesurer la pression haute côté HP",
+        "measurement": "Pression HP",
+        "expected_value": "Max 42 bar (R410A)",
+        "tool": "Manifold"
+      }
+    ],
+    "test_points": [
+      { "label": "Pressostat HP (ouvert/fermé)", "expected": "Fermé < 42 bar" }
+    ],
+    "reset_procedure": "Éteignez l'unité, nettoyez le condenseur, attendez 15 min. Le pressostat se réinitialise automatiquement à la baisse de pression.",
+    "parts_likely_needed": [
+      { "name": "Pressostat Haute Pression", "part_number": "DB93-11159A" }
+    ],
+    "related_codes": ["E5", "E6"],
+    "notes": "Vérifiez l'installation : espacement minimal de 30 cm autour de l'unité extérieure requis."
+  },
+  {
+    "id": "samsung-ac-e6",
+    "brand": "Samsung",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["Samsung Wind-Free", "AR09TXHQASINEU"],
+    "code": "E6",
+    "name": "Erreur de Communication Int./Ext.",
+    "subsystem": "Communication",
+    "severity": "CRITICAL",
+    "description": "La communication entre la carte PCB de l'unité intérieure et extérieure est interrompue.",
+    "root_causes": [
+      { "rank": 1, "cause": "Câble de communication (bornes 2-3) ouvert, inversé ou endommagé" },
+      { "rank": 2, "cause": "Alimentation manquante à l'unité extérieure" },
+      { "rank": 3, "cause": "Carte PCB intérieure ou extérieure défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier le câblage aux bornes 1 (N), 2 (L), 3 (S) sur les deux unités",
+        "measurement": "Continuité",
+        "expected_value": "Sans interruption",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la tension entre les bornes 2 et 3",
+        "measurement": "Tension DC",
+        "expected_value": "1 à 12V DC fluctuant",
+        "tool": "Multimètre (DC)"
+      }
+    ],
+    "test_points": [
+      { "label": "Signal Communication Borne 3", "expected": "DC Fluctuant" }
+    ],
+    "reset_procedure": "Coupez l'alimentation 5 min. Revérifiez et resserrez toutes les bornes. Redémarrez.",
+    "parts_likely_needed": [
+      { "name": "Carte PCB Extérieure Samsung", "part_number": "DB93-12160A" }
+    ],
+    "related_codes": ["E7", "E8"],
+    "notes": "Un câble de longueur excessive (>30m) sans section adaptée cause souvent cette erreur."
+  },
+
+  {
+    "id": "hisense-ac-e1",
+    "brand": "Hisense",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["Hisense Easy Smart", "Hisense Hi-Comfort", "AS-09/12/18UR4SVDDB"],
+    "code": "E1",
+    "name": "Protection Haute Pression",
+    "subsystem": "Protection",
+    "severity": "CRITICAL",
+    "description": "Le pressostat haute pression a été activé suite à une pression anormale côté refoulement.",
+    "root_causes": [
+      { "rank": 1, "cause": "Condenseur sale ou obstrué" },
+      { "rank": 2, "cause": "Ventilateur extérieur défaillant" },
+      { "rank": 3, "cause": "Excès de réfrigérant" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Nettoyer les ailettes du condenseur",
+        "measurement": "Visuelle",
+        "expected_value": "Passage d'air libre",
+        "tool": "Jet d'eau"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer les pressions HP et BP avec manifold",
+        "measurement": "Pression réfrigérant",
+        "expected_value": "HP < 42 bar, BP > 2 bar",
+        "tool": "Manifold"
+      }
+    ],
+    "test_points": [
+      { "label": "Pression HP", "expected": "< 42 bar en fonctionnement" }
+    ],
+    "reset_procedure": "Coupez l'unité, nettoyez le condenseur, attendez 15 min et redémarrez.",
+    "parts_likely_needed": [
+      { "name": "Pressostat HP", "part_number": "Hisense 2602000600" }
+    ],
+    "related_codes": ["E2", "E3"],
+    "notes": "Chez Hisense, E1 = HP. Vérifiez d'abord l'encrassement avant de soupçonner une surcharge."
+  },
+  {
+    "id": "hisense-ac-e3",
+    "brand": "Hisense",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["Hisense Hi-Comfort", "AMS-12/18UR4SZB"],
+    "code": "E3",
+    "name": "Défaut Sonde Température Échangeur Intérieur",
+    "subsystem": "Capteur",
+    "severity": "FAULT",
+    "description": "La thermistance de l'échangeur de chaleur de l'unité intérieure retourne une valeur hors plage.",
+    "root_causes": [
+      { "rank": 1, "cause": "Thermistance déconnectée ou circuit ouvert" },
+      { "rank": 2, "cause": "Thermistance en court-circuit" },
+      { "rank": 3, "cause": "PCB intérieure endommagée" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Déconnecter la thermistance et mesurer sa résistance",
+        "measurement": "Résistance",
+        "expected_value": "10 kΩ à 25°C",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Inspecter le câble de la thermistance pour tout dommage visible",
+        "measurement": "Visuelle",
+        "expected_value": "Câble intact",
+        "tool": "Aucun"
+      }
+    ],
+    "test_points": [
+      { "label": "Résistance Sonde Échangeur Int.", "expected": "10 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Remplacez la thermistance défectueuse. Redémarrez l'alimentation.",
+    "parts_likely_needed": [
+      { "name": "Thermistance Échangeur Hisense", "part_number": "H-H11K10K" }
+    ],
+    "related_codes": ["E4", "E5"],
+    "notes": "Toujours comparer avec la table NTC fournie dans le manuel de service Hisense."
+  },
+  {
+    "id": "hisense-ac-e6",
+    "brand": "Hisense",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["Hisense All Series"],
+    "code": "E6",
+    "name": "Erreur de Communication Int./Ext.",
+    "subsystem": "Communication",
+    "severity": "CRITICAL",
+    "description": "Absence de communication entre les cartes PCB intérieure et extérieure.",
+    "root_causes": [
+      { "rank": 1, "cause": "Câblage de communication endommagé ou desserré" },
+      { "rank": 2, "cause": "Alimentation extérieure absente" },
+      { "rank": 3, "cause": "PCB intérieure ou extérieure défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier la tension aux bornes de l'unité extérieure",
+        "measurement": "Tension AC",
+        "expected_value": "220-240V AC entre L et N",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier la continuité du fil de signal (borne 3) entre les unités",
+        "measurement": "Continuité",
+        "expected_value": "< 1 Ω",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Fil Signal Borne 3", "expected": "Continu, < 1 Ω" }
+    ],
+    "reset_procedure": "Coupez le disjoncteur 5 min. Resserrez les bornes et redémarrez.",
+    "parts_likely_needed": [
+      { "name": "Carte PCB Intérieure Hisense", "part_number": "Varie par modèle" }
+    ],
+    "related_codes": ["E1", "E5"],
+    "notes": "Testez toujours les deux cartes avant de les remplacer — commencez par l'extérieure."
+  },
+
+  {
+    "id": "goldvision-ac-e1",
+    "brand": "Gold Vision",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard/Inverter",
+    "applicable_models": ["Gold Vision GV-09/12/18/24 Series"],
+    "code": "E1",
+    "name": "Protection Haute Pression (Pressostat HP)",
+    "subsystem": "Protection",
+    "severity": "CRITICAL",
+    "description": "Le pressostat de haute pression a coupé le compresseur suite à une pression trop élevée.",
+    "root_causes": [
+      { "rank": 1, "cause": "Condenseur encrassé ou obstrué" },
+      { "rank": 2, "cause": "Ventilateur extérieur défaillant ou bloqué" },
+      { "rank": 3, "cause": "Surcharge de réfrigérant" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Nettoyer le condenseur et vérifier la libre circulation de l'air",
+        "measurement": "Visuelle",
+        "expected_value": "Ailettes propres",
+        "tool": "Jet d'eau"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier la rotation du ventilateur extérieur",
+        "measurement": "Ampères/Rotation",
+        "expected_value": "Tourne normalement",
+        "tool": "Pince ampèremétrique"
+      }
+    ],
+    "test_points": [
+      { "label": "Pression HP (R22/R410A)", "expected": "< 28 bar R22 / < 42 bar R410A" }
+    ],
+    "reset_procedure": "Coupez l'unité, résolvez l'obstruction, attendez 15 min avant redémarrage.",
+    "parts_likely_needed": [
+      { "name": "Pressostat HP", "part_number": "Générique 42 bar" }
+    ],
+    "related_codes": ["E2", "E5"],
+    "notes": "Gold Vision utilise des marques OEM chinoises — les codes sont souvent identiques au standard chinois générique."
+  },
+  {
+    "id": "goldvision-ac-e2",
+    "brand": "Gold Vision",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard/Inverter",
+    "applicable_models": ["Gold Vision GV Series"],
+    "code": "E2",
+    "name": "Protection Basse Pression / Gel Évaporateur",
+    "subsystem": "Protection",
+    "severity": "FAULT",
+    "description": "Le pressostat basse pression s'est déclenché ou le capteur détecte un gel de l'évaporateur.",
+    "root_causes": [
+      { "rank": 1, "cause": "Filtre à air intérieur encrassé bloquant le flux d'air" },
+      { "rank": 2, "cause": "Réfrigérant insuffisant (fuite ou sous-charge)" },
+      { "rank": 3, "cause": "Ventilateur intérieur défaillant" },
+      { "rank": 4, "cause": "Température ambiante trop basse en mode froid (<16°C)" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Nettoyer les filtres de l'unité intérieure",
+        "measurement": "Visuelle",
+        "expected_value": "Filtres propres",
+        "tool": "Eau"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la pression basse pression",
+        "measurement": "Pression BP",
+        "expected_value": "> 2 bar (R410A) en fonctionnement",
+        "tool": "Manifold"
+      }
+    ],
+    "test_points": [
+      { "label": "Pression BP", "expected": "3–5 bar à température normale" }
+    ],
+    "reset_procedure": "Éteignez l'unité 30 min pour dégeler l'évaporateur. Nettoyez les filtres avant redémarrage.",
+    "parts_likely_needed": [
+      { "name": "Recharge Réfrigérant R410A", "part_number": "Bouteille R410A" }
+    ],
+    "related_codes": ["E1", "F1"],
+    "notes": "El gel de l'évaporateur est souvent signe d'une fuite de réfrigérant ou de filtre obstrué."
+  },
+  {
+    "id": "goldvision-ac-e4",
+    "brand": "Gold Vision",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard/Inverter",
+    "applicable_models": ["Gold Vision GV Series"],
+    "code": "E4",
+    "name": "Défaut Sonde Température Échangeur Extérieur",
+    "subsystem": "Capteur",
+    "severity": "FAULT",
+    "description": "La thermistance de l'échangeur extérieur retourne une valeur hors plage (court-circuit ou circuit ouvert).",
+    "root_causes": [
+      { "rank": 1, "cause": "Thermistance déconnectée" },
+      { "rank": 2, "cause": "Câble endommagé par les intempéries" },
+      { "rank": 3, "cause": "PCB extérieure défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Localiser et déconnecter la thermistance extérieure",
+        "measurement": "Résistance",
+        "expected_value": "10 kΩ à 25°C",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Thermistance Échangeur Ext.", "expected": "10 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Remplacez la thermistance défectueuse et redémarrez.",
+    "parts_likely_needed": [
+      { "name": "Thermistance NTC 10K", "part_number": "Générique NTC10K" }
+    ],
+    "related_codes": ["E3", "E5"],
+    "notes": "Le connecteur de la sonde extérieure est souvent corrodé par l'humidité."
+  },
+
+  {
+    "id": "carrier-ac-e3",
+    "brand": "Carrier",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["Carrier 42QHC", "Carrier XPower Gold", "Carrier 38QHC"],
+    "code": "E3",
+    "name": "Protection Basse Pression / Sonde BP",
+    "subsystem": "Protection",
+    "severity": "FAULT",
+    "description": "La pression basse côté aspiration est en dessous du seuil minimal de fonctionnement sécurisé.",
+    "root_causes": [
+      { "rank": 1, "cause": "Fuite de réfrigérant" },
+      { "rank": 2, "cause": "Filtre déshydrateur bouché" },
+      { "rank": 3, "cause": "Détendeur (TEV) défaillant" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Brancher le manifold et relever les pressions BP/HP",
+        "measurement": "Pression BP",
+        "expected_value": "> 3 bar (R410A au régime)",
+        "tool": "Manifold"
+      },
+      {
+        "step": 2,
+        "action": "Contrôle visuel du circuit pour détecter des traces d'huile (signe de fuite)",
+        "measurement": "Visuelle",
+        "expected_value": "Aucune trace d'huile",
+        "tool": "Détecteur de fuite électronique"
+      }
+    ],
+    "test_points": [
+      { "label": "Pression BP R410A", "expected": "3–5 bar en mode froid" }
+    ],
+    "reset_procedure": "Après réparation de fuite et recharge réfrigérant, le pressostat se réinitialise automatiquement.",
+    "parts_likely_needed": [
+      { "name": "Filtre Déshydrateur 3/8\"", "part_number": "HH57AC072" },
+      { "name": "Réfrigérant R410A", "part_number": "Bouteille R410A" }
+    ],
+    "related_codes": ["E1", "E2"],
+    "notes": "Ne pas recharger sans localiser et réparer la fuite préalablement."
+  },
+  {
+    "id": "carrier-ac-e5",
+    "brand": "Carrier",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["Carrier XPower 3", "Carrier Xtra"],
+    "code": "E5",
+    "name": "Protection Courant Compresseur (OCP)",
+    "subsystem": "Protection Compresseur",
+    "severity": "CRITICAL",
+    "description": "L'intensité absorbée par le compresseur dépasse la valeur nominale maximale.",
+    "root_causes": [
+      { "rank": 1, "cause": "Tension d'alimentation trop basse (réseau sous-voltée)" },
+      { "rank": 2, "cause": "Compresseur défaillant mécaniquement (bobinages en court-circuit partiel)" },
+      { "rank": 3, "cause": "Module IGBT/IPM défectueux" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Mesurer la tension d'alimentation pendant le démarrage du compresseur",
+        "measurement": "Tension AC",
+        "expected_value": "220–240V ± 10%",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer l'intensité sur les phases du compresseur avec pince",
+        "measurement": "Intensité (A)",
+        "expected_value": "Selon plaque signalétique ± 10%",
+        "tool": "Pince ampèremétrique"
+      },
+      {
+        "step": 3,
+        "action": "Mesurer la résistance des bobinages compresseur (U-V, V-W, U-W)",
+        "measurement": "Résistance",
+        "expected_value": "Équilibrées et < 5 Ω chacune",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Résistance Bobinage Compresseur", "expected": "Équilibrée < 5 Ω" },
+      { "label": "Intensité Phase Compresseur", "expected": "Nominale selon plaque" }
+    ],
+    "reset_procedure": "Coupez l'alimentation 10 min. Si le problème persiste, testez le module IPM et le compresseur.",
+    "parts_likely_needed": [
+      { "name": "Module IPM/IGBT", "part_number": "Varie selon modèle" }
+    ],
+    "related_codes": ["E4", "E6"],
+    "notes": "Un réseau électrique instable ou sous-dimensionné est très souvent la cause sur les chantiers."
+  },
+  {
+    "id": "carrier-ac-f1",
+    "brand": "Carrier",
+    "appliance": "Climatiseur",
+    "subtype": "Inverter Split",
+    "applicable_models": ["Carrier XPower", "Carrier 42QHC018"],
+    "code": "F1",
+    "name": "Défaut Sonde Température Échangeur Intérieur",
+    "subsystem": "Capteur",
+    "severity": "FAULT",
+    "description": "La thermistance de l'échangeur de l'unité intérieure signale une valeur hors plage.",
+    "root_causes": [
+      { "rank": 1, "cause": "Thermistance déconnectée ou défaillante" },
+      { "rank": 2, "cause": "PCB intérieure endommagée" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Mesurer la résistance de la thermistance échangeur à 25°C",
+        "measurement": "Résistance",
+        "expected_value": "10 kΩ ou 15 kΩ (selon modèle)",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Thermistance Échangeur Int.", "expected": "10–15 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Remplacez la thermistance défectueuse. Redémarrez l'alimentation.",
+    "parts_likely_needed": [
+      { "name": "Thermistance Carrier 10K", "part_number": "HH57AC072" }
+    ],
+    "related_codes": ["E1", "E2", "F2"],
+    "notes": "F1 correspond à l'échangeur intérieur chez Carrier — F2 à l'échangeur extérieur."
+  },
+
+  {
+    "id": "diako-ac-e1",
+    "brand": "Diako",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard",
+    "applicable_models": ["Diako DK-09/12/18/24 CS"],
+    "code": "E1",
+    "name": "Protection Haute Pression",
+    "subsystem": "Protection",
+    "severity": "CRITICAL",
+    "description": "Le compresseur s'est arrêté suite à une haute pression anormale dans le circuit frigorifique.",
+    "root_causes": [
+      { "rank": 1, "cause": "Condenseur obstrué ou sale" },
+      { "rank": 2, "cause": "Ventilateur extérieur en panne" },
+      { "rank": 3, "cause": "Surcharge de réfrigérant" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier l'état du condenseur extérieur et nettoyer les ailettes",
+        "measurement": "Visuelle",
+        "expected_value": "Ailettes propres, flux d'air libre",
+        "tool": "Jet d'eau"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier pression HP avec manifold",
+        "measurement": "Pression HP",
+        "expected_value": "< 42 bar R410A",
+        "tool": "Manifold"
+      }
+    ],
+    "test_points": [
+      { "label": "Pression HP", "expected": "< 42 bar" }
+    ],
+    "reset_procedure": "Éteignez l'unité, dégagez le condenseur, attendez 15 min avant redémarrage.",
+    "parts_likely_needed": [
+      { "name": "Pressostat HP 42 bar", "part_number": "Générique" }
+    ],
+    "related_codes": ["E2", "E3"],
+    "notes": "Les unités Diako utilisent souvent des composants standards du marché chinois."
+  },
+  {
+    "id": "diako-ac-e2",
+    "brand": "Diako",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard",
+    "applicable_models": ["Diako DK Series"],
+    "code": "E2",
+    "name": "Défaut Sonde Température Ambiante Intérieure",
+    "subsystem": "Capteur",
+    "severity": "FAULT",
+    "description": "La thermistance de température ambiante de l'unité intérieure est en circuit ouvert ou court-circuité.",
+    "root_causes": [
+      { "rank": 1, "cause": "Thermistance déconnectée de la PCB" },
+      { "rank": 2, "cause": "Thermistance HS (résistance hors limites)" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Mesurer la résistance de la thermistance ambiante",
+        "measurement": "Résistance",
+        "expected_value": "10 kΩ à 25°C",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Sonde Ambiante", "expected": "10 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Remplacez la thermistance. Réinitialisez l'alimentation.",
+    "parts_likely_needed": [
+      { "name": "Thermistance NTC 10K Diako", "part_number": "Générique NTC10K" }
+    ],
+    "related_codes": ["E3", "E4"],
+    "notes": "Vérifiez que la sonde est bien positionnée à l'entrée d'air de l'unité intérieure."
+  },
+  {
+    "id": "diako-ac-e5",
+    "brand": "Diako",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard",
+    "applicable_models": ["Diako DK Series"],
+    "code": "E5",
+    "name": "Protection Surcharge Courant (OCP)",
+    "subsystem": "Protection Compresseur",
+    "severity": "CRITICAL",
+    "description": "Le courant du compresseur dépasse la limite de sécurité.",
+    "root_causes": [
+      { "rank": 1, "cause": "Tension réseau trop basse" },
+      { "rank": 2, "cause": "Compresseur bloqué mécaniquement" },
+      { "rank": 3, "cause": "Court-circuit partiel dans les bobinages" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier la tension d'alimentation lors du démarrage",
+        "measurement": "Tension AC",
+        "expected_value": "220-240V ± 10%",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer la résistance des bobinages du compresseur",
+        "measurement": "Résistance",
+        "expected_value": "Équilibrée, < 10 Ω",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Bobinages Compresseur", "expected": "Équilibrés" }
+    ],
+    "reset_procedure": "Coupez l'alimentation 10 min. Vérifiez tension et bobinages avant redémarrage.",
+    "parts_likely_needed": [
+      { "name": "Compresseur de remplacement", "part_number": "Varie selon BTU" }
+    ],
+    "related_codes": ["E1", "E6"],
+    "notes": "Un stabilisateur de tension est fortement recommandé dans des zones à réseau instable."
+  },
+
+  {
+    "id": "fitco-ac-e1",
+    "brand": "Fitco",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard/Inverter",
+    "applicable_models": ["Fitco FT-09/12/18/24"],
+    "code": "E1",
+    "name": "Défaut Sonde Ambiante Intérieure",
+    "subsystem": "Capteur",
+    "severity": "FAULT",
+    "description": "La thermistance de température ambiante de l'unité intérieure est défaillante (circuit ouvert ou court-circuit).",
+    "root_causes": [
+      { "rank": 1, "cause": "Sonde déconnectée ou endommagée" },
+      { "rank": 2, "cause": "PCB intérieure défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Mesurer la résistance de la sonde ambiante",
+        "measurement": "Résistance",
+        "expected_value": "10 kΩ à 25°C",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Sonde Ambiante Int.", "expected": "10 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Remplacer la thermistance et réinitialiser l'alimentation.",
+    "parts_likely_needed": [
+      { "name": "Thermistance NTC 10K", "part_number": "Générique NTC10K" }
+    ],
+    "related_codes": ["E2", "E3"],
+    "notes": "Fitco utilise des composants PCB standards — les sondes NTC sont souvent interchangeables."
+  },
+  {
+    "id": "fitco-ac-e3",
+    "brand": "Fitco",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard/Inverter",
+    "applicable_models": ["Fitco FT Series"],
+    "code": "E3",
+    "name": "Protection Basse Pression",
+    "subsystem": "Protection",
+    "severity": "FAULT",
+    "description": "La pression d'aspiration est en dessous du seuil minimal de protection.",
+    "root_causes": [
+      { "rank": 1, "cause": "Fuite de réfrigérant" },
+      { "rank": 2, "cause": "Filtre à air intérieur encrassé" },
+      { "rank": 3, "cause": "Ventilateur intérieur defaillant" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Mesurer la pression basse avec manifold",
+        "measurement": "Pression BP",
+        "expected_value": "> 2 bar (R410A)",
+        "tool": "Manifold"
+      },
+      {
+        "step": 2,
+        "action": "Nettoyer les filtres de l'unité intérieure",
+        "measurement": "Visuelle",
+        "expected_value": "Filtres propres",
+        "tool": "Eau"
+      }
+    ],
+    "test_points": [
+      { "label": "Pression BP R410A", "expected": "> 2 bar" }
+    ],
+    "reset_procedure": "Résolvez la cause (fuite ou filtre). L'unité redémarrera automatiquement.",
+    "parts_likely_needed": [
+      { "name": "Réfrigérant R410A", "part_number": "Bouteille R410A" }
+    ],
+    "related_codes": ["E1", "E4"],
+    "notes": "En cas de fuite, localisez et réparez avant de recharger."
+  },
+  {
+    "id": "fitco-ac-e6",
+    "brand": "Fitco",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard/Inverter",
+    "applicable_models": ["Fitco FT Series"],
+    "code": "E6",
+    "name": "Erreur de Communication Int./Ext.",
+    "subsystem": "Communication",
+    "severity": "CRITICAL",
+    "description": "Absence de signal de communication entre l'unité intérieure et l'unité extérieure.",
+    "root_causes": [
+      { "rank": 1, "cause": "Câble de communication ouvert ou inversé" },
+      { "rank": 2, "cause": "Alimentation absente côté extérieur" },
+      { "rank": 3, "cause": "PCB défectueuse" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Vérifier la continuité du câble de signal entre les bornes",
+        "measurement": "Continuité",
+        "expected_value": "< 1 Ω",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier la tension d'alimentation à l'unité extérieure",
+        "measurement": "Tension AC",
+        "expected_value": "220-240V",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Borne Signal Ext.", "expected": "Continu, sans interruption" }
+    ],
+    "reset_procedure": "Réparez le câblage ou la borne desserrée. Coupez et redémarrez l'alimentation.",
+    "parts_likely_needed": [
+      { "name": "PCB Extérieure Fitco", "part_number": "Varie par modèle" }
+    ],
+    "related_codes": ["E1", "E5"],
+    "notes": "Vérifiez le chemin de câble pour des pincements ou des coupures liés à l'installation."
+  },
+
+  {
+    "id": "felips-ac-e1",
+    "brand": "Felips",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard",
+    "applicable_models": ["Felips FL-09/12/18/24"],
+    "code": "E1",
+    "name": "Défaut Sonde Température Ambiante",
+    "subsystem": "Capteur",
+    "severity": "FAULT",
+    "description": "La sonde de température ambiante de l'unité intérieure présente un circuit ouvert ou un court-circuit.",
+    "root_causes": [
+      { "rank": 1, "cause": "Thermistance déconnectée" },
+      { "rank": 2, "cause": "Thermistance défaillante hors plage" },
+      { "rank": 3, "cause": "Carte PCB intérieure endommagée" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Déconnecter et mesurer la résistance de la thermistance ambiante",
+        "measurement": "Résistance",
+        "expected_value": "10 kΩ à 25°C",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Vérifier l'intégrité du câble de la sonde",
+        "measurement": "Visuelle",
+        "expected_value": "Câble intact et connecteur propre",
+        "tool": "Aucun"
+      }
+    ],
+    "test_points": [
+      { "label": "Thermistance Ambiante Int.", "expected": "10 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Remplacez la thermistance et redémarrez l'alimentation.",
+    "parts_likely_needed": [
+      { "name": "Thermistance NTC 10K Felips", "part_number": "Générique NTC10K" }
+    ],
+    "related_codes": ["E2", "E3"],
+    "notes": "Felips utilise des composants standards. Une thermistance NTC10K générique convient généralement."
+  },
+  {
+    "id": "felips-ac-e2",
+    "brand": "Felips",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard",
+    "applicable_models": ["Felips FL Series"],
+    "code": "E2",
+    "name": "Défaut Sonde Échangeur Intérieur",
+    "subsystem": "Capteur",
+    "severity": "FAULT",
+    "description": "La sonde de l'échangeur de chaleur de l'unité intérieure est hors plage.",
+    "root_causes": [
+      { "rank": 1, "cause": "Sonde déconnectée ou endommagée" },
+      { "rank": 2, "cause": "Humidité ou corrosion sur le connecteur" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Mesurer la résistance de la sonde échangeur intérieur à 25°C",
+        "measurement": "Résistance",
+        "expected_value": "10 kΩ",
+        "tool": "Multimètre"
+      }
+    ],
+    "test_points": [
+      { "label": "Sonde Échangeur Int.", "expected": "10 kΩ à 25°C" }
+    ],
+    "reset_procedure": "Remplacez la sonde et réinitialisez l'alimentation.",
+    "parts_likely_needed": [
+      { "name": "Sonde NTC 10K", "part_number": "Générique NTC10K" }
+    ],
+    "related_codes": ["E1", "E3"],
+    "notes": "Nettoyez le connecteur à l'alcool isopropylique si une corrosion est visible."
+  },
+  {
+    "id": "felips-ac-e5",
+    "brand": "Felips",
+    "appliance": "Climatiseur",
+    "subtype": "Split Standard",
+    "applicable_models": ["Felips FL Series"],
+    "code": "E5",
+    "name": "Protection Surcharge Courant Compresseur",
+    "subsystem": "Protection Compresseur",
+    "severity": "CRITICAL",
+    "description": "Le courant du compresseur dépasse la limite de protection maximale.",
+    "root_causes": [
+      { "rank": 1, "cause": "Tension secteur trop basse" },
+      { "rank": 2, "cause": "Compresseur grippé ou partiellement HS" },
+      { "rank": 3, "cause": "Surcharge de réfrigérant" }
+    ],
+    "diagnostic_steps": [
+      {
+        "step": 1,
+        "action": "Mesurer la tension d'alimentation lors du démarrage du compresseur",
+        "measurement": "Tension AC",
+        "expected_value": "220-240V ± 10%",
+        "tool": "Multimètre"
+      },
+      {
+        "step": 2,
+        "action": "Mesurer l'intensité absorbée par le compresseur",
+        "measurement": "Intensité AC",
+        "expected_value": "Conforme à la plaque ± 10%",
+        "tool": "Pince ampèremétrique"
+      }
+    ],
+    "test_points": [
+      { "label": "Courant Compresseur", "expected": "Conforme plaque signalétique" }
+    ],
+    "reset_procedure": "Coupez l'alimentation 10 min. Vérifiez la tension secteur et le compresseur.",
+    "parts_likely_needed": [
+      { "name": "Condensateur de démarrage compresseur", "part_number": "Selon BTU" }
+    ],
+    "related_codes": ["E1", "E6"],
+    "notes": "Vérifiez aussi le condensateur de démarrage — une capacitance faible peut causer ce code."
+  }
+]
